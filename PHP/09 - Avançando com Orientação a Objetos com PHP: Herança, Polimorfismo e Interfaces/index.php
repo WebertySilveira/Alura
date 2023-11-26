@@ -1,10 +1,25 @@
 <?php
 
-require_once 'src/Cpf.php';
-require_once 'src/Cliente.php';
-require_once 'src/Conta.php';
-require_once 'src/Endereco.php';
-require_once 'src/Funcionario.php';
+/**
+ * Pega a classe que foi solicitada e faz o require trocando pelo nome da pasta e tratando as barras.
+ */
+spl_autoload_register(function (string $nome) {
+    $caminho = str_replace("Banco", 'src', $nome);
+
+    // Inverter barras do path (Prevê diferenças entre windows e linux)
+    $caminho = str_replace("\\", DIRECTORY_SEPARATOR, $caminho);
+    $caminho .= ".php";
+
+    if (file_exists($caminho)) {
+        require_once $caminho;
+    }
+});
+
+use Banco\Modelo\Conta\Conta;
+use Banco\Modelo\Cpf;
+use Banco\Modelo\Endereco;
+use Banco\Modelo\Funcionario;
+use Banco\Modelo\Conta\Cliente;
 
 $cliente = new Cliente(
     "Weberty",

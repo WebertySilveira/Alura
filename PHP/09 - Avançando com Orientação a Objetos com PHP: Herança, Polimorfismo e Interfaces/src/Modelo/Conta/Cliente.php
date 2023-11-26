@@ -1,6 +1,10 @@
 <?php
 
-require_once 'src/Pessoa.php';
+namespace Banco\Modelo\Conta;
+
+use Banco\Modelo\Cpf;
+use Banco\Modelo\Endereco;
+use Banco\Modelo\Pessoa;
 
 /**
  * @property Pessoa $pessoa

@@ -1,5 +1,7 @@
 <?php
 
+namespace Banco\Modelo;
+
 /**
  * @property Cpf $cpf
  */

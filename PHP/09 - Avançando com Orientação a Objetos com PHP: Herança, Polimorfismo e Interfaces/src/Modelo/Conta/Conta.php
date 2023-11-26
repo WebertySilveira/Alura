@@ -1,5 +1,7 @@
 <?php
 
+namespace Banco\Modelo\Conta;
+
 /**
  * Class Conta
  *
