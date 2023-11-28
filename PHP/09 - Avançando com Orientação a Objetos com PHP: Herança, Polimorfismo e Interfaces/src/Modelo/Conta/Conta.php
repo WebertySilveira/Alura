@@ -7,18 +7,17 @@ namespace Banco\Modelo\Conta;
  *
  * @property Cliente $cliente
  */
-class Conta
+abstract class Conta
 {
     /**
      * @var float
      */
-    private float $saldo;
-
+    protected float $saldo;
+    /**
+     * @var Cliente
+     */
     private Cliente $cliente;
 
-    /**
-     * @var int
-     */
     private static int $quantidadeDeContas = 0;
 
     /**
@@ -47,11 +46,15 @@ class Conta
      */
     public function sacar(float $valorASacar)
     {
-        if ($this->saldo < $valorASacar) {
+        $tarifaSaque = $valorASacar * $this->percentualTarifa();
+
+        $saque = $valorASacar + $tarifaSaque;
+        if ($this->saldo < $saque) {
             return "Saldo indisponível";
         }
 
-        $this->saldo -= $valorASacar;
+
+        $this->saldo -= $saque;
     }
 
     /**
@@ -110,4 +113,9 @@ class Conta
     {
         return $this->cliente->getCpf();
     }
+
+    /**
+     * @return void
+     */
+    abstract protected function percentualTarifa(): float;
 }

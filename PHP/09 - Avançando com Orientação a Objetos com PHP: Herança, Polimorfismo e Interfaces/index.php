@@ -16,6 +16,8 @@ spl_autoload_register(function (string $nome) {
 });
 
 use Banco\Modelo\Conta\Conta;
+use Banco\Modelo\Conta\ContaPoupanca;
+use Banco\Modelo\Conta\ContaCorrente;
 use Banco\Modelo\Cpf;
 use Banco\Modelo\Endereco;
 use Banco\Modelo\Funcionario;
@@ -37,8 +39,10 @@ $funcionario = new Funcionario(
     new Cpf("111.111.111-11"),
     "Empacotador"
 );
-$conta = new Conta($cliente, 200);
 
+$conta = new ContaPoupanca($cliente, 0, 1);
+
+$conta->depositar(200);
 $conta->sacar(100);
 echo "1°" . PHP_EOL;
 echo "Nome: {$conta->recuperarNomeCliente()}" . PHP_EOL;
