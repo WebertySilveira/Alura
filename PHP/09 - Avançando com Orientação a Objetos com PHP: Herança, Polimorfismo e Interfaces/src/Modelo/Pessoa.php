@@ -7,6 +7,8 @@ namespace Banco\Modelo;
  */
 class Pessoa
 {
+    use AcessarPropriedades;
+
     /**
      * @var string
      */
@@ -23,7 +25,7 @@ class Pessoa
      */
     public function __construct(string $nome, Cpf $cpf)
     {
-        $this->validaNomeTitular($nome);
+        $this->validaNome($nome);
 
         $this->nome = $nome;
         $this->cpf = $cpf;
@@ -49,7 +51,7 @@ class Pessoa
      * @param string $cpfTitular
      * @return void
      */
-    private function validaNomeTitular(string $cpfTitular): void
+    private function validaNome(string $cpfTitular): void
     {
         if (strlen($cpfTitular) < 5) {
             echo "Nome precisa ter mais de 5 caracteres";

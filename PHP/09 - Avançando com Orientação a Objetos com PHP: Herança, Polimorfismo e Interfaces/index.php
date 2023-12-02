@@ -1,27 +1,12 @@
 <?php
 
-/**
- * Pega a classe que foi solicitada e faz o require trocando pelo nome da pasta e tratando as barras.
- */
-spl_autoload_register(function (string $nome) {
-    $caminho = str_replace("Banco", 'src', $nome);
+require_once "autoload.php";
 
-    // Inverter barras do path (Prevê diferenças entre windows e linux)
-    $caminho = str_replace("\\", DIRECTORY_SEPARATOR, $caminho);
-    $caminho .= ".php";
-
-    if (file_exists($caminho)) {
-        require_once $caminho;
-    }
-});
-
-use Banco\Modelo\Conta\Conta;
-use Banco\Modelo\Conta\ContaPoupanca;
-use Banco\Modelo\Conta\ContaCorrente;
-use Banco\Modelo\Cpf;
-use Banco\Modelo\Endereco;
-use Banco\Modelo\Funcionario;
-use Banco\Modelo\Conta\Cliente;
+use Banco\Service\{ControladorBonificacao, Autenticador};
+use Banco\Modelo\{Cpf, Endereco};
+use Banco\Modelo\Conta\{Conta, ContaPoupanca, Cliente};
+use Banco\Modelo\Funcionario\
+{Funcionario, Desenvolvedor, EditorVideo, Gerente, Diretor};
 
 $cliente = new Cliente(
     "Weberty",
@@ -34,20 +19,37 @@ $cliente = new Cliente(
         "X",
     )
 );
-$funcionario = new Funcionario(
+$funcionario = new Desenvolvedor(
     "John Doe",
     new Cpf("111.111.111-11"),
-    "Empacotador"
+    3000
 );
 
 $conta = new ContaPoupanca($cliente, 0, 1);
-
 $conta->depositar(200);
 $conta->sacar(100);
+
 echo "1°" . PHP_EOL;
 echo "Nome: {$conta->recuperarNomeCliente()}" . PHP_EOL;
 echo "CPF:" . $conta->recuperarCpfCliente() . PHP_EOL;
 echo "Saldo: {$conta->recuperarSaldo()}" . PHP_EOL;
 echo "----------------------------------------------------" . PHP_EOL;
+
+$controlador = new ControladorBonificacao();
+$controlador->adicionarBonificacao($funcionario);
+
 echo "Consultor: {$funcionario->getCpf()}" . PHP_EOL;
 echo "CONTAS CADASTRADAS: " . Conta::recuperarNumeroDeContas() . PHP_EOL;
+echo "Bonificacao: {$controlador->recuperarTotal()}" . PHP_EOL;
+
+echo "----------------------------------------------------" . PHP_EOL;
+echo "Salário: {$funcionario->getSalario()}" . PHP_EOL;
+//$funcionario->promocao();
+echo "Novo salário: {$funcionario->getSalario()}" . PHP_EOL;
+
+echo "----------------------------------------------------" . PHP_EOL;
+$autenticar = new Autenticador();
+//echo "{$autenticar->login($funcionario, '1234')}";
+
+
+$funcionario->nome;

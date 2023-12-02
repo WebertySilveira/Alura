@@ -2,6 +2,7 @@
 
 namespace Banco\Modelo\Conta;
 
+use Banco\Modelo\Autenticavel;
 use Banco\Modelo\Cpf;
 use Banco\Modelo\Endereco;
 use Banco\Modelo\Pessoa;
@@ -9,7 +10,7 @@ use Banco\Modelo\Pessoa;
 /**
  * @property Pessoa $pessoa
  */
-class Cliente extends Pessoa
+class Cliente extends Pessoa implements Autenticavel
 {
     private Endereco $endereco;
 
@@ -22,5 +23,10 @@ class Cliente extends Pessoa
     {
         parent::__construct($nome, $cpf);
         $this->endereco = $endereco;
+    }
+
+    public function podeAutenticar(string $senha): bool
+    {
+        return $senha === "abcd";
     }
 }

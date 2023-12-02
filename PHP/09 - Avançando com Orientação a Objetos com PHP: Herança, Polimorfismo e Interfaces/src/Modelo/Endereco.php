@@ -2,8 +2,16 @@
 
 namespace Banco\Modelo;
 
-class Endereco
+/**
+ * @@property-read string $rua
+ * @@property-read string $bairro
+ * @@property-read string $cidade
+ * @@property-read string $estado
+ */
+final class Endereco
 {
+
+    use AcessarPropriedades;
 
     /**
      * @var string
@@ -80,5 +88,10 @@ class Endereco
     public function getNumero(): string
     {
         return $this->numero;
+    }
+
+    public function __toString()
+    {
+        return "{$this->rua}, {$this->numero}, {$this->bairro}, {$this->cidade}, {$this->estado}";
     }
 }
