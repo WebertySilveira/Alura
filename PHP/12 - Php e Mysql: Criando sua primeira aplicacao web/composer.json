@@ -1,0 +1,15 @@
+{
+    "name": "weberty/12",
+    "autoload": {
+        "psr-4": {
+            "Weberty\\12\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "webertysilveira",
+            "email": "weberty.silveira.sousa@gmail.com"
+        }
+    ],
+    "require": {}
+}

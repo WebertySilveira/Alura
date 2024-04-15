@@ -17,8 +17,8 @@ try {
     $studentRepository->save($aStudent);
     $aStudent = new Student(null, "teste2", new DateTimeImmutable('1985-05-01'));
     $studentRepository->save($aStudent);
-    throw new Exception();
-}catch (Exception $e) {
+} catch (PDOException $e) {
+    echo $e->getMessage();
     $connection->rollBack();
 }
 

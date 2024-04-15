@@ -8,4 +8,3 @@ use Alura\Pdo\Infrastructure\Repository\PdoStudentRepository;
 $pdo = ConnectionCreator::createConnection();
 $result = (new PdoStudentRepository)->allStudents();
 var_dump($result);
-
